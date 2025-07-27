@@ -19,16 +19,16 @@ spring:
         multiplier: 1.1
     function:
       definition: pack|label #스프링 클라우드 함수가 관리할 함수 정의
-    stream:
+    stream: # 클라우드 스트림 바인딩 및 레빗MQ 대상 설정
       bindings:
-        packlabel-in-0:
-          destination: order-accepted
-          group: ${spring.application.name}
-        packlabel-out-0:
-          destination: order-dispatched
+        packlabel-in-0: #입력 바인딩
+          destination: order-accepted # 바인더를 연결할 대상의 브로커 내에서의 실제 이름
+          group: ${spring.application.name} # 대상에 관심을 갖는 소비자 그룹
+        packlabel-out-0: # 출력 바인딩
+          destination: order-dispatched #바인더를 연결할 대상의 브로커 내의 실제 이름
   rabbitmq:
     host: localhost
     port: 5672
-    username: user
-    password: password
+    username: rabbit
+    password: rabbit
     connection-timeout: 5s
