@@ -7,7 +7,7 @@ plugins {
 group = "com.bookshop"
 version = "0.0.1-SNAPSHOT"
 description = "Provides functionality for dispatching orders."
-
+extra.set("otelVersion", "1.33.3")
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(17)
@@ -27,6 +27,11 @@ dependencies {
     implementation ("org.springframework.cloud:spring-cloud-starter-config")
     implementation ("org.springframework.cloud:spring-cloud-stream-binder-rabbit")
     implementation ("org.springframework.retry:spring-retry")
+    implementation ("org.springframework.boot:spring-boot-starter-actuator")
+    implementation ("org.springframework.boot:spring-boot-starter-webflux")
+
+    runtimeOnly ("io.micrometer:micrometer-registry-prometheus")
+    runtimeOnly ("io.opentelemetry.javaagent:opentelemetry-javaagent:${property("otelVersion")}")
 
     testImplementation("org.assertj:assertj-core")
     testImplementation ("org.springframework.boot:spring-boot-starter-webflux")
